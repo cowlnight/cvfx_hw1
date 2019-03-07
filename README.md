@@ -97,15 +97,15 @@
 
 ![](https://i.imgur.com/PlSDGLf.jpg)
 
-&emsp;&emsp;Original Image是因為雲太厚、方向沒有正對太陽升起的地方而沒看到的日出。
-&emsp;&emsp;Target Image是高美濕地的日落。
-&emsp;&emsp;Result Image合成出來有海邊晚霞的感覺。
-&emsp;&emsp;將兩張圖片分別迭代1次、5次和10次的結果如上圖所示。可以看出迭代次數越多，Target Image的色彩轉移到Original Image上就越豐富，但是同時隨著迭代次數的增加，圖片的顆粒感加重，並在圖片上方中間產生些許破碎感。
+<br>&emsp;&emsp;Original Image是因為雲太厚、方向沒有正對太陽升起的地方而沒看到的日出。
+<br>&emsp;&emsp;Target Image是高美濕地的日落。
+<br>&emsp;&emsp;Result Image合成出來有海邊晚霞的感覺。
+<br>&emsp;&emsp;將兩張圖片分別迭代1次、5次和10次的結果如上圖所示。可以看出迭代次數越多，Target Image的色彩轉移到Original Image上就越豐富，但是同時隨著迭代次數的增加，圖片的顆粒感加重，並在圖片上方中間產生些許破碎感。
 
 * **Photo to Monet**
 
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;![](https://i.imgur.com/xxovc68.png)
-&emsp;&emsp;用莫內風格的畫對於真實照片進行處理，可以很明顯看出處理後的照片邊緣銳化，部分處理得有些失真，但對於色彩鮮艷對比度高的照片處理後和莫內風格還是有些許相似。
+<br>&emsp;&emsp;用莫內風格的畫對於真實照片進行處理，可以很明顯看出處理後的照片邊緣銳化，部分處理得有些失真，但對於色彩鮮艷對比度高的照片處理後和莫內風格還是有些許相似。
 
 ---
 
