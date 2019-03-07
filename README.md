@@ -9,32 +9,31 @@
 1. 取得Target Image與Source Image的RGB值。
 2. RGB space->LMS space。因為lαβ space是LMS cone space轉變來的，所以先將RGB space圖像轉變為LMS space。包含以下兩個步驟：
 * &emsp;&ensp;RGB space->XYZ tristimulus values
-&ensp;![](https://i.imgur.com/kSAInLC.png)
+&ensp;<br>![](https://i.imgur.com/kSAInLC.png)<br>
 * &emsp;&ensp;XYZ tristimulus values->LMS space
-&emsp;![](https://i.imgur.com/zH8wIwC.png)
+&emsp;<br>![](https://i.imgur.com/zH8wIwC.png)<br>
 3. 分別對LMS取以10為底的對數，得到相對應的**L&nbsp;M&nbsp;S**。
-&emsp;&emsp;![](https://i.imgur.com/Ue2Wf1T.png)
+&emsp;&emsp;<br>![](https://i.imgur.com/Ue2Wf1T.png)<br>
 4. LMS space->lαβ color space.
-&emsp;![](https://i.imgur.com/3Whv0yH.png)
+&emsp;<br>![](https://i.imgur.com/3Whv0yH.png)<br>
 5. 用統計學的方法來進行顏色校正。
 * 分別求出l、α、β各自的平均值(<>)和標準差(σ)。
 * Source Image中l、α、β減去各自的均值，並乘上Target Image與Source Image的比值，得到如下公式l'、α'、β'的值。
-&emsp;&ensp;![](https://i.imgur.com/ir7uNi7.png)&emsp;&emsp;![](https://i.imgur.com/inkmYEr.png)
+&emsp;&ensp;<br>![](https://i.imgur.com/ir7uNi7.png)&emsp;&emsp;![](https://i.imgur.com/inkmYEr.png)<br>
 * 再加上Target Image中l、α、β的均值。
 6. lαβ space->LMS space->RGB space.將Step5最後得到的結果通過step4、2的對應的反矩陣計算轉回XYZ color space。
 
 #### Result：
 
-![](https://i.imgur.com/ddbDQ7O.png)
+<br>![](https://i.imgur.com/ddbDQ7O.png)<br>
 
 &emsp;&emsp;本方法將一張圖片（Target Image）的顏色表現轉移到另一張圖（Original Image）上，但當Target Image和Source Image差異過大時，其效果並沒有表現得很好。
 
 ---
 ### Histogram Equalization on RGB space
 &emsp;&emsp;histogram equalization（直方圖均化）是一種圖像增强方式。我們以灰階圖片為範例，取得灰階圖片的累積分布函數（CDF），把原本集中在某區塊的機率函數(PDF)平均分布在所有顏色上面，達到增加圖片的對比度的效果。
-<img src='https://i.imgur.com/EVM5MmV.png'/>
-<br>
-<img src='https://i.imgur.com/STMmlJl.png'/>
+<br><img src='https://i.imgur.com/EVM5MmV.png'/><br>
+<img src='https://i.imgur.com/STMmlJl.png'/><br>
 
 &emsp;&emsp;在image color transfer中，我們可以利用提取Target image的RGB三通道的累積分布函數（CDF），來對Source Image進行histogram equalization（直方圖均化），以達到將Source image的顔色分佈特徵轉化為Target image的顔色分佈特徵，從而實現image color transfer.
 
@@ -44,10 +43,10 @@
 3. Target Image的顔色分佈特徵將應用在Source Image上。
 
 #### Result:
-![](https://i.imgur.com/TtTXUWO.jpg)
+<br>![](https://i.imgur.com/TtTXUWO.jpg)<br>
 *Left*: Source images. *Middle*: Target paintings. *Right*: Results  with histogram equalization on R, G, and B channels.
 
-![](https://i.imgur.com/wDeKlMh.jpg)
+<br>![](https://i.imgur.com/wDeKlMh.jpg)<br>
 *Left*: Source paintings. *Middle*: Target images. *Right*: Results  with histogram equalization on R, G, and B channels.
 
 ---
@@ -57,13 +56,13 @@
 #### Step:
 1. 計算取得Target Image與Source Image的累積分布函數（CDF）![](https://i.imgur.com/s4Cr08V.png)和![](https://i.imgur.com/3h0xVqW.png)。
 2. 爲了使Source Image的色彩向Target Image靠近，我們需要計算得出![](https://i.imgur.com/s4Cr08V.png)和![](https://i.imgur.com/3h0xVqW.png)的最小絕對差(演算法如下)，以8bit的圖片爲例，我們需要分別重新映射(mapping)RGB三個通道的256個顔色層級，使兩張圖片的顔色分佈靠近。
-![](https://i.imgur.com/Otr06Y9.png)
+<br>![](https://i.imgur.com/Otr06Y9.png)<br>
 3. 將得出的重新映射(mapping))數組應用在Source Image上。
 
 #### Result:
-![](https://i.imgur.com/8H5mhzU.png)
-![](https://i.imgur.com/Y7bIqa2.png)
-![](https://i.imgur.com/Knb5uZf.png)
+<br>![](https://i.imgur.com/8H5mhzU.png)<br>
+![](https://i.imgur.com/Y7bIqa2.png)<br>
+![](https://i.imgur.com/Knb5uZf.png)<br>
 
 
 
@@ -77,12 +76,12 @@
 1. 旋轉迭代第k代樣本X<sup>(k)</sup>和Target Image樣本Y，以此來改變坐標系。
 2. 兩個樣本的分佈分別投影到新的座標軸上（邊緣f<sub>i</sub>，g<sub>i</sub>）。
 3. 用如下公式找到每個軸的映射t<sub>i</sub>，將邊緣f<sub>i</sub>轉移到g<sub>i</sub>。X和Y分別是f(x)和g(x)的pdf，C<sub>x</sub>和C<sub>y</sub>分別是X和Y的累積。
-![](https://i.imgur.com/9aluqs5.png)
+<br>![](https://i.imgur.com/9aluqs5.png)<br>
 4. 再用得到的t將樣本（x<sub>1</sub>,...,x<sub>N</sub>）轉換為t(x<sub>1</sub>,...,x<sub>N</sub>)=(t<sub>1</sub>(x<sub>1</sub>),...,t<sub>N</sub>(x<sub>N</sub>))。
 5. 用R-1旋轉樣本完成迭代回到原本的坐標系中。
 
 &emsp;&emsp;如圖演算法所示。
-![](https://i.imgur.com/Z54vHOY.png)
+<br>![](https://i.imgur.com/Z54vHOY.png)<br>
 &emsp;&emsp;如果重複足夠多次不同的旋轉，該算法可以收斂至f<sup>(∞)</sup> = g （隨機旋轉已經足夠收斂）。
 
 #### Result：
